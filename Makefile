@@ -256,6 +256,15 @@ endif
 	$(RM) "$(DESTDIR)$(LIBDIR)/$(LIB.STATIC)"
 	$(RM) "$(DESTDIR)$(BINDIR)/$(GLEWINFO.BIN)" "$(DESTDIR)$(BINDIR)/$(VISUALINFO.BIN)"
 
+uninstall.shared:
+	$(RM) "$(DESTDIR)$(LIBDIR)/$(LIB.DEVLNK)"
+ifeq ($(filter-out mingw% cygwin,$(SYSTEM)),)
+	$(RM) "$(DESTDIR)$(BINDIR)/$(LIB.SHARED)"
+else
+	$(RM) "$(DESTDIR)$(LIBDIR)/$(LIB.SONAME)"
+	$(RM) "$(DESTDIR)$(LIBDIR)/$(LIB.SHARED)"
+endif
+
 clean:
 	$(RM) -r tmp/
 	$(RM) -r lib/
